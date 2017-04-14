@@ -108,7 +108,7 @@ if __name__ == "__main__":
     if bs.scheduler is None:
         print("Cannot determine scheduler")
         sys.exit(1)
-    else
+    else:
         print("Scheduler is %s" % bs.scheduler)
 
     print("Slot memory is: %s " % bs.memory)
