@@ -25,7 +25,12 @@ class BatchSystem(object):
             self.walltime = None
 
             self.determine_scheduler()
-            print(self.scheduler)
+            if self.scheduler is 'htcondor':
+                self.info_condor()
+            elif self.scheduler is 'slurm':
+                self.info_slurm()
+            elif self.scheduler is 'pbs':
+                self.info_pbs()
 
         def determine_scheduler(self):
             """
