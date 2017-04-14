@@ -33,12 +33,6 @@ class BatchSystem(object):
             elif self.scheduler is 'pbs':
                 self.info_pbs()
 
-            print("Slot memory is: %s " % self.memory)
-            print("Slot CPUs is: %s " % self.cpus)
-            print("Slot disk is: %s " % self.disk)
-            print("Slot queue is: %s " % self.queue)
-            print("Slot walltime is: %s " % self.walltime)
-
         def determine_scheduler(self):
             """
             Read the environment to determine the job scheduler running
@@ -115,4 +109,8 @@ if __name__ == "__main__":
     if bs.scheduler is None:
         print("Cannot determine scheduler")
         sys.exit(1)
-
+    print("Slot memory is: %s " % bs.memory)
+    print("Slot CPUs is: %s " % bs.cpus)
+    print("Slot disk is: %s " % bs.disk)
+    print("Slot queue is: %s " % bs.queue)
+    print("Slot walltime is: %s " % bs.walltime)
