@@ -73,7 +73,7 @@ class BatchSystem(object):
             self.cpus = int(classads["Cpus "].strip())
             # we always return bytes
             self.memory = int(classads["TotalSlotMemory "].strip()) * 1024 * 1024 
-            self.disk = float(classads["TotalSlotDisk "].strip()) * 1024 * 1024
+            self.disk = int(float(classads["TotalSlotDisk "].strip()) * 1024 * 1024)
 
         def info_pbs(self):
             """
