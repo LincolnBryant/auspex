@@ -26,7 +26,6 @@ class BatchSystem(object):
 
             self.determine_scheduler()
             if self.scheduler is 'htcondor':
-                print("Scheduler is condor")
                 self.info_condor()
             elif self.scheduler is 'slurm':
                 self.info_slurm()
@@ -109,6 +108,9 @@ if __name__ == "__main__":
     if bs.scheduler is None:
         print("Cannot determine scheduler")
         sys.exit(1)
+    else
+        print("Scheduler is %s" % bs.scheduler)
+
     print("Slot memory is: %s " % bs.memory)
     print("Slot CPUs is: %s " % bs.cpus)
     print("Slot disk is: %s " % bs.disk)
