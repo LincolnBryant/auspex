@@ -85,11 +85,11 @@ class BatchSystem(object):
                 queue                  --> Job queue
             """
 
-            jid = os.environ.get("$PBS_JOBID")
-            p = subprocess.Popen(["qstat","-f " + jid], stdout=subprocess.PIPE)
+            jid = os.environ.get("PBS_JOBID")
+            p = subprocess.Popen(["qstat","-f " + jid], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, err = p.communicate()
 
-            print(out)
+            print(out,err)
     
 
         def info_slurm(self):
