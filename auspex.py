@@ -39,7 +39,7 @@ class BatchSystem(object):
             by checking for the presence of a job ID or job ad
             """
             job_environment = {
-                                "_CONDOR_JOB_AD" : "htcondor",
+                                "_CONDOR_MACHINE_AD" : "htcondor",
                                 "SLURM_JOB_ID" : "slurm",
                                 "PBS_JOBID" : "pbs",
                             }
@@ -86,7 +86,7 @@ class BatchSystem(object):
             """
 
             jid = os.environ.get("$PBS_JOBID")
-            p = subprocess.Popen(["qstat","-f",jid], stdout=subprocess.PIPE)
+            p = subprocess.Popen(["qstat","-f " + jid], stdout=subprocess.PIPE)
             out, err = p.communicate()
 
             print(out)
