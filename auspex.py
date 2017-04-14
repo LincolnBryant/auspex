@@ -26,11 +26,18 @@ class BatchSystem(object):
 
             self.determine_scheduler()
             if self.scheduler is 'htcondor':
+                print("Scheduler is condor")
                 self.info_condor()
             elif self.scheduler is 'slurm':
                 self.info_slurm()
             elif self.scheduler is 'pbs':
                 self.info_pbs()
+
+            print("Slot memory is: %s " % self.memory)
+            print("Slot CPUs is: %s " % self.cpus)
+            print("Slot disk is: %s " % self.disk)
+            print("Slot queue is: %s " % self.queue)
+            print("Slot walltime is: %s " % self.walltime)
 
         def determine_scheduler(self):
             """
@@ -59,7 +66,14 @@ class BatchSystem(object):
                 TotalSlotdisk   --> Total amount of disk space (in MB) for this
                                     slot's sandbox
             """
-            
+            m_ad = os.environ.get("_CONDOR_MACHINE_AD")
+            with open(m_ad) as f:
+                classads = dict(classad.split("=",1) for classad in f) 
+
+            self.cpus = int(classads["Cpus "].strip())
+            # we always return bytes
+            self.memory = int(classads["TotalSlotMemory "].strip()) * 1024 * 1024 
+            self.disk = float(classads["TotalSlotDisk "].strip()) * 1024 * 1024
 
         def info_pbs(self):
             """
