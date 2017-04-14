@@ -2,6 +2,7 @@
 from __future__ import print_function
 import os
 import sys
+import subprocess
 
 
 class BatchSystem(object):
@@ -58,15 +59,16 @@ class BatchSystem(object):
                 TotalSlotMemory --> Memory (in MB) for the job slot
                 TotalSlotdisk   --> Total amount of disk space (in MB) for this
                                     slot's sandbox
+
+            This function always returns output in base units 
             """
             m_ad = os.environ.get("_CONDOR_MACHINE_AD")
             with open(m_ad) as f:
                 classads = dict(classad.split("=",1) for classad in f) 
 
             self.cpus = int(classads["Cpus "].strip())
-            # we always return bytes
             self.memory = int(classads["TotalSlotMemory "].strip()) * 1024 * 1024 
-            self.disk = int(float(classads["TotalSlotDisk "].strip()) * 1024 * 1024)
+            self.disk = int(float(classads["TotalSlotDisk "].strip())) * 1024 * 1024
 
         def info_pbs(self):
             """
@@ -81,8 +83,13 @@ class BatchSystem(object):
                 Resource_List.mem      --> Memory (with units) for the job slot
                 Resource_List.walltime --> Maximum walltime for the job
                 queue                  --> Job queue
-                
             """
+
+            jid = os.environ.get("$PBS_JOBID")
+            p = subprocess.Popen(["qstat","-f",jid], stdout=subprocess.PIPE)
+            out, err = p.communicate()
+
+            print(out)
     
 
         def info_slurm(self):
@@ -111,8 +118,8 @@ if __name__ == "__main__":
     else:
         print("Scheduler is %s" % bs.scheduler)
 
-    print("Slot memory is: %s " % bs.memory)
+    print("Slot memory is: %s bytes" % bs.memory)
     print("Slot CPUs is: %s " % bs.cpus)
-    print("Slot disk is: %s " % bs.disk)
+    print("Slot disk is: %s bytes" % bs.disk)
     print("Slot queue is: %s " % bs.queue)
     print("Slot walltime is: %s " % bs.walltime)
