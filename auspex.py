@@ -24,15 +24,22 @@ class BatchSystem(object):
             self.queue = None
             self.walltime = None
 
+            self.determine_scheduler()
+            print(self.scheduler)
+
         def determine_scheduler(self):
             """
             Read the environment to determine the job scheduler running
             by checking for the presence of a job ID or job ad
             """
-            job_environment = ["_CONDOR_JOB_AD", "SLURM_JOB_ID", "PBS_JOBID"]
+            job_environment = {
+                                "_CONDOR_JOB_AD" : "htcondor",
+                                "SLURM_JOB_ID" : "slurm",
+                                "PBS_JOBID" : "pbs",
+                            }
             for key in job_environment:
                 if os.environ.get(key) is not None:
-                    self.scheduler = key
+                    self.scheduler = job_environment[key]
                     break
                 else:
                     self.scheduler = None
