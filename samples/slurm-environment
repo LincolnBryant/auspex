@@ -1,0 +1,102 @@
+SLURM_NODELIST=midway072
+SLURM_CHECKPOINT_IMAGE_DIR=/var/slurm/checkpoint
+MANPATH=/software/slurm-current-el6-x86_64/share/man:/software/perl-5.18-el6-x86_64/man:/software/git-2.7-el6-x86_64/share/man:/software/emacs-24-el6-x86_64/share/man:/software/subversion-1.8-el6-x86_64/share/man:/software/vim-7.4-el6-x86_64/share/man:/software/man/midway_sl6
+SLURM_JOB_NAME=_interactive
+HOSTNAME=midway072
+SLURM_TOPOLOGY_ADDR=midway072
+SLURMD_NODENAME=midway072
+_LMFILES__modshare=/software/modulefiles/vim/7.4:1:/etc/modulefiles/env/rcc:11:/etc/modulefiles/slurm/current:1:/software/modulefiles/perl/5.18:2:/software/modulefiles/git/2.7:1:/software/modulefiles/emacs/24:1:/software/modulefiles/subversion/1.8:1
+SLURM_PRIO_PROCESS=0
+MODULEPATH_modshare=/software/modulefiles:11:/etc/modulefiles:11
+SLURM_NODE_ALIASES=(null)
+SHELL=/bin/bash
+TERM=screen
+HISTSIZE=1000
+SLURM_JOB_QOS=sandyb
+I_MPI_FABRICS=shm:ofa
+SSH_CLIENT=192.170.227.128 48554 22
+TMPDIR=/tmp
+DISTARCH=el6-x86_64
+SLURM_TOPOLOGY_ADDR_PATTERN=node
+LIBRARY_PATH=/software/slurm-current-el6-x86_64/lib64:/software/slurm-current-el6-x86_64/lib:/software/perl-5.18-el6-x86_64/lib:/software/git-2.7-el6-x86_64/lib64:/software/subversion-1.8-el6-x86_64/lib
+LIBRARY_PATH_modshare=/software/slurm-current-el6-x86_64/lib64:1:/software/git-2.7-el6-x86_64/lib64:1:/software/slurm-current-el6-x86_64/lib:1:/software/perl-5.18-el6-x86_64/lib:2:/software/subversion-1.8-el6-x86_64/lib:1
+VGL_CLIENT=midway-login1-ib0
+SSH_TTY=/dev/pts/36
+SLURM_MEM_PER_CPU=2000
+USER=lincolnb
+SLURM_NNODES=1
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+LD_LIBRARY_PATH=/software/slurm-current-el6-x86_64/lib64:/software/slurm-current-el6-x86_64/lib:/software/perl-5.18-el6-x86_64/lib:/software/git-2.7-el6-x86_64/lib64:/software/subversion-1.8-el6-x86_64/lib
+VGL_COMPRESS=rgb
+CPATH=/software/slurm-current-el6-x86_64/include:/software/subversion-1.8-el6-x86_64/include
+SLURM_JOBID=25851977
+TERMCAP=SC|screen|VT 100/ANSI X3.64 virtual terminal:\
+        :DO=\E[%dB:LE=\E[%dD:RI=\E[%dC:UP=\E[%dA:bs:bt=\E[Z:\
+        :cd=\E[J:ce=\E[K:cl=\E[H\E[J:cm=\E[%i%d;%dH:ct=\E[3g:\
+        :do=^J:nd=\E[C:pt:rc=\E8:rs=\Ec:sc=\E7:st=\EH:up=\EM:\
+        :le=^H:bl=^G:cr=^M:it#8:ho=\E[H:nw=\EE:ta=^I:is=\E)0:\
+        :li#24:co#80:am:xn:xv:LP:sr=\EM:al=\E[L:AL=\E[%dL:\
+        :cs=\E[%i%d;%dr:dl=\E[M:DL=\E[%dM:dc=\E[P:DC=\E[%dP:\
+        :im=\E[4h:ei=\E[4l:mi:IC=\E[%d@:ks=\E[?1h\E=:\
+        :ke=\E[?1l\E>:vi=\E[?25l:ve=\E[34h\E[?25h:vs=\E[34l:\
+        :ti=\E[?1049h:te=\E[?1049l:k0=\E[10~:k1=\EOP:k2=\EOQ:\
+        :k3=\EOR:k4=\EOS:k5=\E[15~:k6=\E[17~:k7=\E[18~:\
+        :k8=\E[19~:k9=\E[20~:k;=\E[21~:F1=\E[23~:F2=\E[24~:\
+        :kh=\E[1~:@1=\E[1~:kH=\E[4~:@7=\E[4~:kN=\E[6~:kP=\E[5~:\
+        :kI=\E[2~:kD=\E[3~:ku=\EOA:kd=\EOB:kr=\EOC:kl=\EOD:
+PATH=/software/slurm-current-el6-x86_64/bin:/software/perl-5.18-el6-x86_64/bin:/software/git-2.7-el6-x86_64/bin:/software/emacs-24-el6-x86_64/bin:/software/subversion-1.8-el6-x86_64/bin:/software/vim-7.4-el6-x86_64/bin:/software/bin:/srv/adm/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/lpp/mmfs/bin
+MAIL=/var/spool/mail/lincolnb
+SLURM_TASKS_PER_NODE=1
+STY=14475.slurm25851977
+SLURM_JOB_ID=25851977
+PWD=/home/lincolnb
+SLURM_JOB_USER=lincolnb
+_LMFILES_=/software/modulefiles/vim/7.4:/software/modulefiles/subversion/1.8:/software/modulefiles/emacs/24:/software/modulefiles/git/2.7:/etc/modulefiles/env/rcc:/software/modulefiles/perl/5.18:/etc/modulefiles/slurm/current
+CUDA_VISIBLE_DEVICES=NoDevFiles
+XCATPROFILE=midway_sl6
+LANG=en_US.UTF-8
+MODULEPATH=/software/modulefiles:/etc/modulefiles
+SLURM_UMASK=0002
+LOADEDMODULES=vim/7.4:subversion/1.8:emacs/24:git/2.7:env/rcc:perl/5.18:slurm/current
+SLURM_JOB_UID=414703179
+SLURM_NODEID=0
+CPATH_modshare=/software/subversion-1.8-el6-x86_64/include:1:/software/slurm-current-el6-x86_64/include:1
+SLURM_SUBMIT_DIR=/home/lincolnb
+SLURM_TASK_PID=14475
+SLURM_CPUS_ON_NODE=1
+KRB5CCNAME=FILE:/tmp/krb5cc_414703179_BdllG5
+HISTCONTROL=ignoredups
+ENVIRONMENT=BATCH
+SLURM_PROCID=0
+SLURM_JOB_NODELIST=midway072
+HOME=/home/lincolnb
+SHLVL=3
+PATH_modshare=/software/git-2.7-el6-x86_64/bin:1:/usr/bin:1:/software/bin:11:/usr/local/bin:1:/srv/adm/bin:11:/software/slurm-current-el6-x86_64/bin:1:/software/emacs-24-el6-x86_64/bin:1:/bin:1:/sbin:1:/software/vim-7.4-el6-x86_64/bin:1:/usr/sbin:1:/software/perl-5.18-el6-x86_64/bin:2:/software/subversion-1.8-el6-x86_64/bin:1:/usr/lpp/mmfs/bin:11:/usr/local/sbin:1
+SLURM_LOCALID=0
+DIST=el6
+SLURM_CLUSTER_NAME=midway
+SLURM_JOB_CPUS_PER_NODE=1
+MANPATH_modshare=/software/perl-5.18-el6-x86_64/man:2:/software/vim-7.4-el6-x86_64/share/man:1:/software/slurm-current-el6-x86_64/share/man:1:/software/git-2.7-el6-x86_64/share/man:1:/software/emacs-24-el6-x86_64/share/man:1:/software/subversion-1.8-el6-x86_64/share/man:1:/software/man/midway_sl6:11
+SLURM_SUBMIT_HOST=midway-login1
+SLURM_GTIDS=0
+SLURM_JOB_PARTITION=sandyb
+LOGNAME=lincolnb
+MODULERCFILE=/srv/adm/modules/init/modulerc
+CVS_RSH=/usr/bin/ssh
+LD_LIBRARY_PATH_modshare=/software/slurm-current-el6-x86_64/lib64:1:/software/git-2.7-el6-x86_64/lib64:1:/software/slurm-current-el6-x86_64/lib:1:/software/perl-5.18-el6-x86_64/lib:2:/software/subversion-1.8-el6-x86_64/lib:1
+WINDOW=1
+SSH_CONNECTION=192.170.227.128 48554 128.135.112.71 22
+SOFTPATH=/software
+SLURM_JOB_ACCOUNT=pi-lgrandi
+GPU_DEVICE_ORDINAL=NoDevFiles
+MODULESHOME=/srv/adm/modules
+SLURM_JOB_NUM_NODES=1
+I_MPI_HYDRA_BOOTSTRAP=slurm
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+LOADEDMODULES_modshare=env/rcc:11:vim/7.4:1:slurm/current:1:perl/5.18:2:git/2.7:1:emacs/24:1:subversion/1.8:1
+ARCH=x86_64
+G_BROKEN_FILENAMES=1
+SCRATCH=/scratch/midway/lincolnb
+BASH_FUNC_module()=() {  eval `$TCLSH /srv/adm/modules/modulecmd.tcl bash $*`
+}
+_=/bin/env

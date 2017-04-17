@@ -1,0 +1,56 @@
+[osgconnect@node0238 ~]$ qstat -f $PBS_JOBID
+Job Id: 1261537.pbs02
+    Job_Name = STDIN
+    Job_Owner = osgconnect@user001.palmetto.clemson.edu
+    resources_used.cpupercent = 0
+    resources_used.cput = 00:00:00
+    resources_used.mem = 0kb
+    resources_used.ncpus = 1
+    resources_used.vmem = 0kb
+    resources_used.walltime = 00:00:00
+    job_state = R
+    queue = osg_e
+    server = pbs02
+    Checkpoint = u
+    ctime = Thu Apr 13 19:27:40 2017
+    Error_Path = /dev/pts/1
+    exec_host = node0238/1
+    exec_vnode = (node0238:mem=1048576kb:ncpus=1:ngpus=0:nphis=0)
+    group_list = osg
+    Hold_Types = n
+    interactive = True
+    Join_Path = n
+    Keep_Files = n
+    Mail_Points = a
+    Mail_Users = osgconnect@clemson.edu
+    mtime = Thu Apr 13 19:27:42 2017
+    Output_Path = /dev/pts/1
+    Priority = 0
+    qtime = Thu Apr 13 19:27:40 2017
+    Rerunable = False
+    Resource_List.mem = 1gb
+    Resource_List.ncpus = 1
+    Resource_List.ngpus = 0
+    Resource_List.nodect = 1
+    Resource_List.nphis = 0
+    Resource_List.place = free:shared
+    Resource_List.qcat = osg_qcat
+    Resource_List.select = 1
+    Resource_List.walltime = 24:00:00
+    stime = Thu Apr 13 19:27:42 2017
+    session_id = 10261
+    jobdir = /home/osgconnect
+    substate = 42
+    Variable_List = PBS_O_SYSTEM=Linux,PBS_O_SHELL=/bin/bash,
+           PBS_O_HOME=/home/osgconnect,PBS_O_LOGNAME=osgconnect,
+           PBS_O_WORKDIR=/home/osgconnect,PBS_O_LANG=en_US.UTF-8,
+           PBS_O_PATH=/usr/lib64/qt-3.3/bin:/opt/pbs/default/bin:/usr/local/bin:/
+           bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/mx/bin:/home/osgconne
+           ct/bin,PBS_O_MAIL=/var/spool/mail/osgconnect,PBS_O_QUEUE=osg,
+           PBS_O_HOST=user001.palmetto.clemson.edu
+    comment = Job run at Thu Apr 13 at 19:27 on (node0238:mem=1048576kb:ncpus=1
+           :ngpus=0:nphis=0)
+    etime = Thu Apr 13 19:27:40 2017
+    run_count = 1
+    Submit_arguments = -I
+    project = _pbs_project_default

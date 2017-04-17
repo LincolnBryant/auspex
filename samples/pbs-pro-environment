@@ -1,0 +1,22 @@
+[osgconnect@node0238 ~]$ env | grep PBS
+PBS_JOBNAME=STDIN
+PBS_ENVIRONMENT=PBS_INTERACTIVE
+PBS_O_WORKDIR=/home/osgconnect
+PBS_TASKNUM=1
+PBS_O_HOME=/home/osgconnect
+PBS_MOMPORT=15003
+PBS_O_QUEUE=osg
+PBS_O_LOGNAME=osgconnect
+PBS_O_LANG=en_US.UTF-8
+PBS_JOBCOOKIE=000000003CD8C03A000000005CD5006B
+PBS_NODENUM=0
+PBS_TZID=America/New_York
+PBS_JOBDIR=/home/osgconnect
+PBS_O_SHELL=/bin/bash
+PBS_JOBID=1261537.pbs02
+PBS_O_HOST=user001.palmetto.clemson.edu
+PBS_QUEUE=osg_e
+PBS_O_MAIL=/var/spool/mail/osgconnect
+PBS_O_SYSTEM=Linux
+PBS_NODEFILE=/var/spool/PBS/aux/1261537.pbs02
+PBS_O_PATH=/usr/lib64/qt-3.3/bin:/opt/pbs/default/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/mx/bin:/home/osgconnect/bin

@@ -86,10 +86,10 @@ class BatchSystem(object):
             """
 
             jid = os.environ.get("PBS_JOBID")
-            p = subprocess.Popen(["qstat","-f",jid], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            p = subprocess.Popen(["qstat","-f",jid], stdout=subprocess.PIPE)
             out, err = p.communicate()
 
-            print(out,err)
+            kv = dict(key.split("=",1) for key in out.split('\n')[1:])
     
 
         def info_slurm(self):
