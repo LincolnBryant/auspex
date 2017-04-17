@@ -92,28 +92,13 @@ class BatchSystem(object):
 
             # whew lads this is janky
             filtered = []
+
             for line in out.split('\n'):
                 if '=' in line:
                     filtered.append(textwrap.dedent(line))
             kv = dict(key.split("=",1) for key in filtered[1:])
             
-            """ memory parsing """
-            # We get the output in gb, maybe other units. Split the units from the value
-            p = re.compile('(\d+)\s*(\w+)')
-            mem = kv["Resource_List.mem "].strip()
-
-            parsed_mem = p.match(mem).groups()
-            # Should look like this:
-            # ('2', 'gb')
-
-            if 'tb' in parsed_mem[1]:
-                mem_bytes = int(parsed_mem[0]) * 1024 * 1024 * 1024 * 1024
-            if 'gb' in parsed_mem[1]:
-                mem_bytes = int(parsed_mem[0]) * 1024 * 1024 * 1024
-            if 'mb' in parsed_mem[1]:
-                mem_bytes = int(parsed_mem[0]) * 1024 * 1024
-
-            self.memory = mem_bytes
+            self.memory = self.memory_parse(kv["Resource_List.mem "].strip())
                             
 
             """ walltime parsing """
@@ -137,11 +122,91 @@ class BatchSystem(object):
 
             For walltime, we use `scontrol` to get detailed job information.
             e.g.,
-                $ scontrol show job $SLURM_JOBID
+                $ scontrol show job $SLURM_JOB_ID
             Then parse the date format and calculate:
                 EndTime - StartTime     --> Maximum walltime for the job
             """
 
+            jid = os.environ.get("SLURM_JOB_ID")
+            p = subprocess.Popen(["scontrol","show","job",jid], stdout=subprocess.PIPE)
+            out, err = p.communicate()
+
+            # SLURM prints multiple key=value pairs per line
+            # we tokenize this to a list of lists, then flatten it
+            #
+            # this seems real bad. need a more idiomatic/pythonig way of doing
+            # it
+            f = []
+            for line in out.split('\n'):
+                if line is not '':
+                    f.append(line.strip().split(' '))
+            filtered = sum(f,[])
+
+            kv = dict(key.split("=",1) for key in filtered)
+            
+            timelimit = kv["TimeLimit"]
+            if timelimit is not "UNLIMITED":
+                self.walltime = self.time_convert(timelimit) 
+            else:
+                self.wall_seconds = -1 # is this the right choice?
+                
+
+            # Try to get the info from scontrol, if we fail fall back to
+            # using keys from the environment
+
+            try:
+                cpus = int(kv["NumCPUs"])
+            except:
+                
+                    try:
+                        cpus = os.environ.get("SLURM_TASKS_PER_NODE")
+                    except:
+                        cpus = None 
+            self.cpus = cpus
+
+            try:
+                queue = kv["Partition"]
+            except:
+                    try:
+                        queue = os.environ.get("SLURM_JOB_PARTITION")
+                    except:
+                        queue = None
+            self.queue = queue
+            
+            try:
+                mem = self.memory_parse(kv["MinMemoryCPU"])
+            except:
+                    try:
+                        mem = int(os.environ.get("SLURM_MEM_PER_CPU")) * 1024 * 1024 
+                    except:
+                        mem = None
+            self.memory = mem
+
+
+        def time_convert(self, timestamp):
+            """ Helper function for converting HH:MM:SS to just seconds """
+            h,m,s = re.split(':',timestamp)
+            return int(h)*3600 + int(m)*60 + int(s)
+
+        def memory_parse(self, memory):
+            """ 
+            Schedulers often attach units to the memory values, so we gotta
+            split those out and multiply by the right values
+            """
+                 
+            p = re.compile('(\d+)\s*(\w+)')
+            mem = memory.strip().upper()
+
+            parsed_mem = p.match(mem).groups()
+
+            if 'T' in parsed_mem[1]:
+                mem_bytes = int(parsed_mem[0]) * 1024 * 1024 * 1024 * 1024
+            if 'G' in parsed_mem[1]:
+                mem_bytes = int(parsed_mem[0]) * 1024 * 1024 * 1024
+            if 'M' in parsed_mem[1]:
+                mem_bytes = int(parsed_mem[0]) * 1024 * 1024
+
+            return mem_bytes
 
 if __name__ == "__main__":
     bs = BatchSystem()
