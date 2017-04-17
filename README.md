@@ -34,3 +34,16 @@ print("job.wall_seconds=%s" % bs.walltime)
 ```
 
 Maybe? Hopefully? Alternatively just run `auspex.py` from a shell to get the default output. 
+
+## Examples
+Here's an example output for HTCondor using a canned machine ad (included in the samples/ directory)
+
+```bash
+$ export _CONDOR_MACHINE_AD=samples/condor-machine-ad
+$ ./auspex.py
+job.mem_bytes=134217728
+job.num_cpus=1
+job.disk_bytes=485827280896
+job.queue=None
+job.wall_seconds=None
+```
