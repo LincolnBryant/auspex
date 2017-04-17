@@ -33,7 +33,7 @@ print("job.queue=%s" % bs.queue)
 print("job.wall_seconds=%s" % bs.walltime)
 ```
 
-*note*: If Auspex can't find something, it will simply return None. At best, Auspex only provides _hints_ about the scheduler system running underneath. Absence of evidence is not evidence of absence!
+**NOTE**: If Auspex can't find something, it will simply return None. At best, Auspex only provides _hints_ about the scheduler system running underneath. Absence of evidence is not evidence of absence!
 
 Maybe? Hopefully? Alternatively just run `auspex.py` from a shell to get the default output. 
 
