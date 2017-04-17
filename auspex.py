@@ -4,6 +4,7 @@ import os
 import sys
 import subprocess
 import textwrap
+import re
 
 
 class BatchSystem(object):
@@ -96,9 +97,26 @@ class BatchSystem(object):
                 if '=' in line:
                     filtered.append(textwrap.dedent(line))
             kv = dict(key.split("=",1) for key in filtered[1:])
+            
+            # We get the output in gb, maybe other units. Split the units from the value
+            p = re.compile('(\d+)\s*(\w+)')
+            mem = kv["Resource_List.mem "].strip()
+
+            parsed_mem = p.match(mem).groups()
+            # Should look like this:
+            # ('2', 'gb')
+
+            if 'tb' in parsed_mem[1]:
+                mem_bytes = int(parsed_mem[0]) * 1024 * 1024 * 1024 * 1024
+            if 'gb' in parsed_mem[1]:
+                mem_bytes = int(parsed_mem[0]) * 1024 * 1024 * 1024
+            if 'mb' in parsed_mem[1]:
+                mem_bytes = int(parsed_mem[0]) * 1024 * 1024
+
+            self.memory = mem_bytes
+                            
 
             self.cpus = int(kv["Resource_List.ncpus "]) 
-            self.memory = kv["Resource_List.mem "]
             self.queue = kv["queue "]
             self.walltime = kv["Resource_List.walltime "]
 
