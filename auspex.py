@@ -6,7 +6,6 @@ import subprocess
 import textwrap
 import re
 
-
 class BatchSystem(object):
         """
         This class has a bunch of internal functions that determine the
@@ -98,6 +97,7 @@ class BatchSystem(object):
                     filtered.append(textwrap.dedent(line))
             kv = dict(key.split("=",1) for key in filtered[1:])
             
+            """ memory parsing """
             # We get the output in gb, maybe other units. Split the units from the value
             p = re.compile('(\d+)\s*(\w+)')
             mem = kv["Resource_List.mem "].strip()
@@ -116,9 +116,14 @@ class BatchSystem(object):
             self.memory = mem_bytes
                             
 
+            """ walltime parsing """
+            walltime = kv["Resource_List.walltime "]
+            h,m,s = re.split(':',walltime)
+            self.walltime = int(h)*3600 + int(m)*60 + int(s)
+
+
             self.cpus = int(kv["Resource_List.ncpus "]) 
-            self.queue = kv["queue "]
-            self.walltime = kv["Resource_List.walltime "]
+            self.queue = kv["queue "].strip()
 
         def info_slurm(self):
             """
@@ -143,11 +148,9 @@ if __name__ == "__main__":
     if bs.scheduler is None:
         print("Cannot determine scheduler")
         sys.exit(1)
-    else:
-        print("Scheduler is %s" % bs.scheduler)
 
-    print("Slot memory is: %s bytes" % bs.memory)
-    print("Slot CPUs is: %s " % bs.cpus)
-    print("Slot disk is: %s bytes" % bs.disk)
-    print("Slot queue is: %s " % bs.queue)
-    print("Slot walltime is: %s " % bs.walltime)
+    print("job.mem_bytes=%s" % bs.memory)
+    print("job.num_cpus=%s" % bs.cpus)
+    print("job.disk_bytes=%s" % bs.disk)
+    print("job.queue=%s" % bs.queue)
+    print("job.wall_seconds=%s" % bs.walltime)
