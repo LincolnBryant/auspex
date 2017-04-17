@@ -119,20 +119,20 @@ class BatchSystem(object):
             try:
                 self.walltime = self.time_convert(walltime) 
             except:
-                self.walltime = None
+                try:
+                    self.walltime = int(os.environ.get("PBS_WALLTIME"))
+                except: 
+                    self.walltime = None
 
 
             """ CPU parsing """
-            # sometimes ncpus is available, other times we need to parse the ppn
+            # sometimes ncpus is available, failing that we use PBS_NP
+            # to make our best guess
             try:
                 self.cpus = int(kv["Resource_List.ncpus "]) 
             except:
                 try: 
-                    # Break down the format "nodes= N:ppn=PPN:gpus=1" into
-                    #  something we can work with
-                    node_keys = kv["Resource_List.nodes "]
-                    node = dict(key.split("=",1) for key in node_keys.split(':')[1:]) 
-                    self.cpus = node["ppn"]
+                    self.cpus = int(os.environ.get("PBS_NP"))
                 except:
                     self.cpus = None
 
@@ -178,9 +178,13 @@ class BatchSystem(object):
             
             timelimit = kv["TimeLimit"]
             if timelimit is not "UNLIMITED":
-                self.walltime = self.time_convert(timelimit) 
+                try:
+                    self.walltime = self.time_convert(timelimit) 
+                except:
+                    self.walltime = None
             else:
-                self.wall_seconds = -1 # is this the right choice?
+                self.wall_seconds = None # if unlimited, its none. 
+                                         # if we cant find it, it's none.
                 
 
             # Try to get the info from scontrol, if we fail fall back to
@@ -189,7 +193,6 @@ class BatchSystem(object):
             try:
                 cpus = int(kv["NumCPUs"])
             except:
-                
                     try:
                         cpus = os.environ.get("SLURM_TASKS_PER_NODE")
                     except:
