@@ -3,6 +3,7 @@ from __future__ import print_function
 import os
 import sys
 import subprocess
+import textwrap
 
 
 class BatchSystem(object):
@@ -89,8 +90,17 @@ class BatchSystem(object):
             p = subprocess.Popen(["qstat","-f",jid], stdout=subprocess.PIPE)
             out, err = p.communicate()
 
-            kv = dict(key.split("=",1) for key in out.split('\n')[1:])
-    
+            # whew lads this is janky
+            filtered = []
+            for line in out.split('\n'):
+                if '=' in line:
+                    filtered.append(textwrap.dedent(line))
+            kv = dict(key.split("=",1) for key in filtered[1:])
+
+            self.cpus = int(kv["Resource_List.ncpus "]) 
+            self.memory = kv["Resource_List.mem "]
+            self.queue = kv["queue "]
+            self.walltime = kv["Resource_List.walltime "]
 
         def info_slurm(self):
             """
