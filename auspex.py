@@ -110,7 +110,7 @@ class BatchSystem(object):
             kv = dict(key.split("=",1) for key in filtered[1:])
             
             try:
-                self.memory = self.memory_parse(kv["Resource_List.mem "].strip())
+                self.memory = int(self.memory_parse(kv["Resource_List.mem "].strip()))
             except:
                 self.memory = None
                             
@@ -194,7 +194,7 @@ class BatchSystem(object):
                 cpus = int(kv["NumCPUs"])
             except:
                     try:
-                        cpus = os.environ.get("SLURM_TASKS_PER_NODE")
+                        cpus = int(os.environ.get("SLURM_TASKS_PER_NODE"))
                     except:
                         cpus = None 
             self.cpus = cpus
@@ -209,7 +209,7 @@ class BatchSystem(object):
             self.queue = queue
             
             try:
-                mem = self.memory_parse(kv["MinMemoryCPU"])
+                mem = int(self.memory_parse(kv["MinMemoryCPU"]))
             except:
                     try:
                         mem = int(os.environ.get("SLURM_MEM_PER_CPU")) * 1024 * 1024 
