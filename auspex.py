@@ -67,9 +67,20 @@ class BatchSystem(object):
             with open(m_ad) as f:
                 classads = dict(classad.split("=",1) for classad in f) 
 
-            self.cpus = int(classads["Cpus "].strip())
-            self.memory = int(classads["TotalSlotMemory "].strip()) * 1024 * 1024 
-            self.disk = int(float(classads["TotalSlotDisk "].strip())) * 1024 * 1024
+            try:
+                self.cpus = int(classads["Cpus "].strip())
+            except:
+                self.cpus = None
+            
+            try:
+                self.memory = int(classads["TotalSlotMemory "].strip()) * 1024 * 1024 
+            except:
+                self.memory = None
+            
+            try:
+                self.disk = int(float(classads["TotalSlotDisk "].strip())) * 1024 * 1024
+            except:
+                self.disk = None
 
         def info_pbs(self):
             """
@@ -98,17 +109,38 @@ class BatchSystem(object):
                     filtered.append(textwrap.dedent(line))
             kv = dict(key.split("=",1) for key in filtered[1:])
             
-            self.memory = self.memory_parse(kv["Resource_List.mem "].strip())
+            try:
+                self.memory = self.memory_parse(kv["Resource_List.mem "].strip())
+            except:
+                self.memory = None
                             
-
             """ walltime parsing """
             walltime = kv["Resource_List.walltime "]
-            h,m,s = re.split(':',walltime)
-            self.walltime = int(h)*3600 + int(m)*60 + int(s)
+            try:
+                self.walltime = self.time_convert(walltime) 
+            except:
+                self.walltime = None
 
 
-            self.cpus = int(kv["Resource_List.ncpus "]) 
-            self.queue = kv["queue "].strip()
+            """ CPU parsing """
+            # sometimes ncpus is available, other times we need to parse the ppn
+            try:
+                self.cpus = int(kv["Resource_List.ncpus "]) 
+            except:
+                try: 
+                    # Break down the format "nodes= N:ppn=PPN:gpus=1" into
+                    #  something we can work with
+                    node_keys = kv["Resource_List.nodes "]
+                    node = dict(key.split("=",1) for key in node_keys.split(':')[1:]) 
+                    self.cpus = node["ppn"]
+                except:
+                    self.cpus = None
+
+            """ Queue """
+            try:
+                self.queue = kv["queue "].strip()
+            except:
+                self.queue = None
 
         def info_slurm(self):
             """
