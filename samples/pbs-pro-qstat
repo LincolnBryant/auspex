@@ -1,4 +1,3 @@
-[osgconnect@node0238 ~]$ qstat -f $PBS_JOBID
 Job Id: 1261537.pbs02
     Job_Name = STDIN
     Job_Owner = osgconnect@user001.palmetto.clemson.edu
